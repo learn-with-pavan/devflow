@@ -6,6 +6,7 @@ spring:
     password: P1159@ra
 
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: validate
 
