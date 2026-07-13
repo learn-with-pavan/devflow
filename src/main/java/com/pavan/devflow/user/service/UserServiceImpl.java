@@ -52,9 +52,7 @@ public class UserServiceImpl implements UserService {
 	public PageResponse<UserResponse> getAllUsers(int page, int size, String sortBy, String direction) {
 		Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
 		Pageable pageable = PageRequest.of(page, size, sort);
-
 		Page<User> userPage = userRepo.findAll(pageable);
-
 		List<UserResponse> users = userPage.getContent().stream().map(mapper::toResponse).toList();
 
 		return PageResponse.<UserResponse>builder().content(users).page(userPage.getNumber()).size(userPage.getSize())
@@ -64,15 +62,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserResponse updateUser(UpdateUserRequest request, Long id) {
-		// TODO Auto-generated method stub
-
 		User user = userRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found with id : " + id));
 
 		user.setFirstName(request.getFirstName());
-
 		user.setLastName(request.getLastName());
-
 		user.setEmail(request.getEmail());
 
 		User updated = userRepo.save(user);
