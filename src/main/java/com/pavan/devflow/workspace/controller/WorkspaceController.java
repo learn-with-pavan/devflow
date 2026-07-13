@@ -49,7 +49,7 @@ public class WorkspaceController {
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<WorkspaceResponse>>> getMyWorkSpace() {
 		List<WorkspaceResponse> response = workSpaceService.getMyWorkSpaces();
-		return ResponseEntity.ok(ResponseBuilder.success(AppConstants.WORKSPACE_FETCHED, response));
+		return ResponseEntity.ok(ResponseBuilder.success(AppConstants.WORKSPACES_FETCHED, response));
 	}
 
 	@PutMapping("/{id}")

@@ -1,6 +1,5 @@
 package com.pavan.devflow.user.entity;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 

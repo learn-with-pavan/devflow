@@ -14,4 +14,11 @@ public final class AppConstants {
 	public static final String WORKSPACES_FETCHED = "Workspaces fetched successfully";
 	public static final String WORKSPACE_UPDATED = "Workspace updated successfully";
 	public static final String WORKSPACE_DELETED = "Workspace deleted successfully";
+	
+	public static final String PROJECT_CREATED = "Project created successfully";
+	public static final String PROJECT_FETCHED = "Project fetched successfully";
+	public static final String PROJECTS_FETCHED = "Projects fetched successfully";
+	public static final String PROJECT_UPDATED = "Project updated successfully";
+	public static final String PROJECT_DELETED = "Project deleted successfully";
+	public static final String PROJECT_ARCHIVED = "Project archived successfully";
 }

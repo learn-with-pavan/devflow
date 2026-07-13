@@ -26,6 +26,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 	private final WorkspaceRepository workSpaceRepository;
 	private final WorkspaceMapper mapper;
 	private final SecurityUtils securityUtils;
+	private final WorkspaceAccessService workspaceAccessService;
 
 	@Override
 	public WorkspaceResponse createWorkspace(CreateWorkspaceRequest request) {
@@ -40,10 +41,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 	@Override
 	@Transactional(readOnly = true)
 	public WorkspaceResponse getWorkspace(Long id) {
-		User currentUser = securityUtils.getCurrentUser();
-		Workspace workSpace = workSpaceRepository.findByIdAndOwner(id, currentUser)
-				.orElseThrow(() -> new ResourceNotFoundException("Workspace not found"));
-
+		Workspace workSpace = workspaceAccessService.getOwnedWorkspace(id);
 		return mapper.toResponse(workSpace);
 	}
 
@@ -57,9 +55,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
 	@Override
 	public WorkspaceResponse updateWorkspace(Long id, UpdateWorkspaceRequest request) {
-		User currentUser = securityUtils.getCurrentUser();
-		Workspace workSpace = workSpaceRepository.findByIdAndOwner(id, currentUser)
-				.orElseThrow(() -> new ResourceNotFoundException("Workspace not found"));
+		Workspace workSpace = workspaceAccessService.getOwnedWorkspace(id);
 		workSpace.setName(request.getName());
 		workSpace.setDescription(request.getDescription());
 		workSpace.setVisibility(request.getVisibility());
@@ -70,9 +66,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
 	@Override
 	public void deleteWorkspace(Long id) {
-		User currentUser = securityUtils.getCurrentUser();
-		Workspace workSpace = workSpaceRepository.findByIdAndOwner(id, currentUser)
-				.orElseThrow(() -> new ResourceNotFoundException("Workspace not found"));
+		Workspace workSpace = workspaceAccessService.getOwnedWorkspace(id);
 		workSpaceRepository.delete(workSpace);
 	}
 
