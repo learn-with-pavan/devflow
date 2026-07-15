@@ -1,9 +1,9 @@
 spring:
   application:
     name: devflow
-    
-  profiles:
-    active: dev
+#    
+#  profiles:
+#    active: dev
 
 server:
   port: 8080
